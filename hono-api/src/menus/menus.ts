@@ -22,6 +22,7 @@ let foodMenus = [
 
 app.get('/', (c) => c.json({ post: foodMenus }))
 
+// GETメソッド
 app.get('/:id', (c) => {
   const id = c.req.param('id')
   const post = foodMenus.find((p) => p.id === id)
@@ -30,6 +31,7 @@ app.get('/:id', (c) => {
   return c.json({ message: 'ページが見つかりませんでした' }, 404)
 })
 
+// POSTメソッド
 app.post('/', async (c) => {
   const { name, content } = await c.req.json<{
     name: string
@@ -40,6 +42,7 @@ app.post('/', async (c) => {
   return c.json(newPost, 201)
 })
 
+// PUTメソッド
 app.put('/:id', async (c) => {
   const id = c.req.param('id')
   const index = foodMenus.findIndex((p) => p.id === id)
@@ -52,6 +55,7 @@ app.put('/:id', async (c) => {
   return c.json(foodMenus[index])
 })
 
+// DELETEメソッド
 app.delete('/:id', async (c) => {
   const id = c.req.param('id')
   const index = foodMenus.findIndex((p) => p.id === id)

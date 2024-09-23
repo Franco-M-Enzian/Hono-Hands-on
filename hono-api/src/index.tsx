@@ -11,11 +11,13 @@ app.use('*', prettyJSON())
 app.use(
   '/auth/*',
   basicAuth({
-    username: 'admin',
-    password: 'secret'
+    // /authでユーザー名とパスワードを入力
+    username: 'user',
+    password: 'password'
   })
 )
 
+// /menusを含めるとPOSTメソッドなどを実行できる
 app.route('/menus', menus)
 app.route('/auth', auth)
 
@@ -30,9 +32,9 @@ app.get('/api/hello', (c) => {
   })
 })
 
-app.get('/posts/:id', (c) => {
-  const page = c.req.query('page')
-  const id = c.req.param('id')
+app.get('/posts/:user_id', (c) => {
+  const page = c.req.query('test')
+  const id = c.req.param('user_id')
   c.header('X-Message', 'Hi!')
   return c.text(`You want see ${page} of ${id}`)
 })
